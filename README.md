@@ -8,6 +8,9 @@ This `docker-compose` project aims to be a realiable and fast way to spin up a `
 
 ## Usage
 
+Note: One may be tempted to replace the `mongodb://db` and `redis://redis` URLs with whatever their mind comes up with, but this is normal !
+Linked docker containers will automatically have hostnames.
+
 1. Clone or download this repo and `cd` into it
 2. If you're on Windows, make sure all `.sh` files have Unix line endings (i.e. just LF). Depending on your `git` configuration, they might be converted to Windows file endings (i.e. CLRF) which will not work. This may also apply to lila scripts like `./lila` or `./ui/build` later on.
 3. Build the lila_base image:
