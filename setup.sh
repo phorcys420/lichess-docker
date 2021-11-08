@@ -23,12 +23,15 @@ then
     read -p "[?] LC is not set, please input your locale (i.e fr_FR.UTf-8) : " LC
 fi
 
-echo [+] Cloning git repository
+echo "[+] TZ : $TZ"
+echo "[+] LC : $LC"
+
+echo "[+] Cloning git repository"
 git clone https://github.com/phorcys420/lichess-docker.git
 cd lichess-docker
 
-echo [+] Building lila_base
+echo "[+] Building lila_base"
 docker build -t phorcys420/lila_base lila_base/
 
-echo [+] Building every image required by the Compose configuration
+echo "[+] Building every image required by the Compose configuration"
 docker-compose build
