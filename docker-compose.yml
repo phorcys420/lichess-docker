@@ -12,6 +12,7 @@ services:
 
   db:
     build: ./lila_db
+    image: phorcys420/lila_db
     container_name: lila_db
     volumes:
       - .:/host
@@ -34,6 +35,7 @@ services:
 
   lila: 
      build: ./lila
+     image: phorcys420/lila
      container_name: lila
      depends_on: 
        - db
@@ -49,6 +51,7 @@ services:
 
   lila_ws:
      build: ./lila_ws
+     image: phorcys420/lila_ws
      container_name: lila_ws
      depends_on: 
        - db
