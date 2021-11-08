@@ -29,6 +29,16 @@ Linked docker containers will automatically have hostnames.**
 4. Edit the CSRF origin in the config file located at `lila_ws/data/conf.conf`
 5. Run `docker-compose up -d --build` from the main directory
 
+<p align="center">OR</p>
+
+1. Run
+```sh
+curl -o- https://raw.githubusercontent.com/phorcys420/lichess-docker/install-script/setup.sh | bash
+```
+2. Edit the configuration file located at `lila/data/application.conf`
+3. Edit the CSRF origin in the config file located at `lila_ws/data/conf.conf`
+4. Run `docker-compose up -d` from the main directory
+
 ## Domain structure
 ```
 chess.lightcord.org.	1	IN	A       78.198.182.162
