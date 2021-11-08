@@ -1,0 +1,49 @@
+version: "3.3" 
+
+volumes:
+  lila_mongo:
+    driver: local
+
+services: 
+  redis:
+    image: redis:6-alpine
+    container_name: lila_redis
+    restart: always
+
+  db:
+    build: ./lila_db
+    container_name: lila_db
+    volumes:
+      - .:/host
+      - lila_mongo:/data/db
+    restart: always
+  
+  lila: 
+     build: ./lila
+     container_name: lila
+     depends_on: 
+       - db
+       - redis
+     links:
+       - db:db
+       - redis:redis
+     volumes:
+       - /root/compose/lichess-docker/lila/data:/data
+     ports: 
+       - 9663:9663
+     restart: always
+
+  lila_ws:
+     build: ./lila_ws
+     container_name: lila_ws
+     depends_on: 
+       - db
+       - redis
+     links:
+       - db:db
+       - redis:redis
+     ports:
+       - 9664:9664
+     volumes:
+       - /root/compose/lichess-docker/lila_ws/data:/data
+     restart: always
