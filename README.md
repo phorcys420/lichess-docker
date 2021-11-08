@@ -8,8 +8,8 @@ This `docker-compose` project aims to be a realiable and fast way to spin up a `
 
 ## Description
 - `lila_base` : A docker image based on `debian:buster-20210816-slim` that packages Scala, Java & NodeJS, soon enough to be alpine-based.
-- `lila`      : A docker image containing the [lila](https://github.com/ornicar/lila) server.
-- `lila_ws`   : A docker image containing the [lila-ws](https://github.com/ornicar/lila-ws) server.
+- `lila`      : A docker image containing the [lila](https://github.com/ornicar/lila) server. (based on `lila_base`)
+- `lila_ws`   : A docker image containing the [lila-ws](https://github.com/ornicar/lila-ws) server. (based on `lila_base`)
 - `lila_db`   : A docker image based on `mongo:4.0`, that automatically sets up the database schema for you.
 
 Example nginx configs are also avaible in the [`nginx_examples`](https://github.com/phorcys420/lichess-docker/tree/master/nginx_examples) folder.
@@ -52,4 +52,5 @@ In the above commands, `lila` is replaceable by `lila_ws`, `lila_db` and any con
 ## TODO
 * Add fishnet
 * Add "play against the computer"
+* Make `lila_base`'s timezone automatical / use build arguments
 * Make `lila_base` alpine-based
