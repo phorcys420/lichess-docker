@@ -1,10 +1,10 @@
 # Lichess Docker Container
 
-This `docker-compose` project aims to be a realiable and fast way to spin up a `lichess` instance.
+This `docker-compose` project aims to be a realiable and fast way to spin up a `lichess` dev instance.
 
 ## Requirements
 - [`docker`](https://docs.docker.com/engine/install/) and [`docker-compose`](https://docs.docker.com/compose/install/)
-- time, and preferably a coffee machine
+- time, and preferably a coffee machine (or actually, weed)
 
 ## Description
 - `lila_base` : A docker image based on `debian:buster-20210816-slim` that packages Scala, Java & NodeJS, soon enough to be alpine-based.
@@ -16,20 +16,16 @@ Example nginx configs are also avaible in the [`nginx_examples`](https://github.
 
 ## Usage
 
-Note: One may be tempted to replace the `mongodb://db` and `redis://redis` URLs with whatever their mind comes up with, but this is normal !
-Linked docker containers will automatically have hostnames.
+**Note: One may be tempted to replace the `mongodb://db` and `redis://redis` URLs with whatever their mind comes up with, but this is normal !
+Linked docker containers will automatically have hostnames.**
 
-
+**Note: If you're on windows (non-WSL), make sure your `git` config is using Unix line endings (LF) and not Windows ones (CLRF)**
 
 1. Clone or download this repo and `cd` into it
-2. If you're on Windows (non-WSL), make sure your `.sh` files have Unix line endings (i.e. just LF). Depending on your `git` configuration, they might be converted to Windows file endings (i.e. CLRF) which will not work.
-3. Build the lila_base image:
-	1. `cd` into the `lila_base` folder
-	2. Edit the Dockerfile to match your locale and timezone
-	3. Run `docker build . -t phorcys/lila_base`
-4. Edit the configuration file located in lila/data/application.conf
-5. Edit the CSRF origin in the config file located in lila_ws/data/conf.conf
-6. Run `docker-compose up -d --build` from the main directory
+2. Build the lila_base image using `docker build -t phorcys/lila_base --build-arg TZ=Europe/Paris --build-arg LC=fr_FR.UTF-8 .`
+3. Edit the configuration file located at `lila/data/application.conf`
+4. Edit the CSRF origin in the config file located at `lila_ws/data/conf.conf`
+5. Run `docker-compose up -d --build` from the main directory
 
 ## Domain structure
 ```
@@ -40,17 +36,22 @@ ws.chess.lightcord.org. 1	IN	CNAME   chess.lightcord.org.
 
 ## Useful commands
 
-* Start all the Docker containers: `docker-compose up -d`
+* Stop all the Compose containers: `docker-compose down`
+* Start all the Compose containers: `docker-compose up -d`
+* Remove all the stopped Compose containers: `docker-compose rm`
+* Start all the Compose containers and build the modified images: `docker-compose up -d --build`
+
+
+* View container logs: `docker logs lila`
 * Stop the Docker container: `docker stop lila`
-* Restart the Docker container and attach to it: `docker start lila --attach --interactive`
 * Open a shell in the running container: `docker exec -it lila bash`
+* Attach to the Docker container (main process): `docker attach lila`
 * Open a shell as root in the running container: `docker exec -u 0 -it lila bash`
-* Remove the Docker container (e.g. to mount a different volume): `docker rm lila`
 
 In the above commands, `lila` is replaceable by `lila_ws`, `lila_db` and any container name in that manner.
 
 ## TODO
 * Add fishnet
 * Add "play against the computer"
-* Make `lila_base`'s timezone automatical / use build arguments
 * Make `lila_base` alpine-based
+* Maybe find a better name

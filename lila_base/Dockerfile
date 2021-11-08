@@ -1,5 +1,8 @@
 FROM debian:buster-20210816-slim
 
+ARG TZ=GMT0
+ARG LC=en_US.UTF-8
+
 SHELL ["/bin/bash", "-c"]
 
 RUN useradd -ms /bin/bash lichess && \
@@ -11,7 +14,7 @@ RUN useradd -ms /bin/bash lichess && \
     apt update && \
     apt install -y unzip zip parallel git scala sbt openjdk-11-jdk-headless openjdk-11-jre-headless
 
-ENV TZ Europe/Paris
+ENV TZ=$TZ
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Cleanup
@@ -26,8 +29,8 @@ ENV HOME /home/lichess
 RUN mkdir -p ~/.parallel && touch ~/.parallel/will-cite
 
 # Set locale
-ENV LANG "fr_FR.UTF-8"
-ENV LC_ALL "fr_FR.UTF-8"
+ENV LANG=$LC
+ENV LC_ALL=$Lc
 
 # nvm => node => yarn
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash && \
