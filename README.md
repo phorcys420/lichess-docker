@@ -19,14 +19,16 @@ Example nginx configs are also avaible in the [`nginx_examples`](https://github.
 Note: One may be tempted to replace the `mongodb://db` and `redis://redis` URLs with whatever their mind comes up with, but this is normal !
 Linked docker containers will automatically have hostnames.
 
+
+
 1. Clone or download this repo and `cd` into it
-2. If you're on Windows, make sure all `.sh` files have Unix line endings (i.e. just LF). Depending on your `git` configuration, they might be converted to Windows file endings (i.e. CLRF) which will not work. This may also apply to lila scripts like `./lila` or `./ui/build` later on.
+2. If you're on Windows (non-WSL), make sure your `.sh` files have Unix line endings (i.e. just LF). Depending on your `git` configuration, they might be converted to Windows file endings (i.e. CLRF) which will not work.
 3. Build the lila_base image:
 	1. `cd` into the `lila_base` folder
 	2. Edit the Dockerfile to match your locale and timezone
 	3. Run `docker build . -t phorcys/lila_base`
 4. Edit the configuration file located in lila/data/application.conf
-5. Edit the CSRF origin file located in lila_ws/data/conf.conf
+5. Edit the CSRF origin in the config file located in lila_ws/data/conf.conf
 6. Run `docker-compose up -d --build` from the main directory
 
 ## Domain structure
