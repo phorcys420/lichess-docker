@@ -31,6 +31,7 @@ RUN mkdir -p ~/.parallel && touch ~/.parallel/will-cite
 # Set locale
 ENV LANG=$LC
 ENV LC_ALL=$Lc
+ENV LANGUAGE=$LC
 
 # nvm => node => yarn
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash && \

@@ -12,7 +12,11 @@ RUN export NVM_DIR="$HOME/.nvm" && \
 
 WORKDIR /home/lichess/lila
 
+#RUN export NVM_DIR="$HOME/.nvm" && \
+#    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
+#    yarn run format
+
 RUN unlink /home/lichess/lila/conf/application.conf
 RUN ln -s /data/application.conf /home/lichess/lila/conf/application.conf
 
-ENTRYPOINT ["./lila", "run"]
+ENTRYPOINT ["./lila", "~run"]

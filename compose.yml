@@ -3,6 +3,10 @@ version: "3.3"
 volumes:
   lila_mongo:
     driver: local
+  lila_ws:
+    driver: local
+  lila:
+    driver: local
 
 services: 
   redis:
@@ -45,6 +49,7 @@ services:
        - redis:redis
      volumes:
        - ./lila/data:/data
+       - lila:/home/lichess/lila
      ports: 
        - 9663:9663
      restart: always
@@ -63,4 +68,8 @@ services:
        - 9664:9664
      volumes:
        - ./lila_ws/data:/data
+       - lila_ws:/home/lichess/lila_ws
      restart: always
+
+
+  
